@@ -1,0 +1,6 @@
+apiVersion: v2
+name: nti-final-project
+description: Frontend + backend app for the NTI DevOps final project
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

@@ -46,8 +46,8 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 sh """
-                    docker build -t ${ECR_REPO}:backend-${BUILD_TAG} ./app/backend
-                    docker build -t ${ECR_REPO}:frontend-${BUILD_TAG} ./app/frontend
+                    docker build -t ${ECR_REPO}:backend-${BUILD_TAG} ./backend
+                    docker build -t ${ECR_REPO}:frontend-${BUILD_TAG} ./frontend
                 """
             }
         }

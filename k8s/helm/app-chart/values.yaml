@@ -1,0 +1,17 @@
+namespace: nti-final-project
+
+backend:
+  image:
+    repository: "463470958932.dkr.ecr.us-east-2.amazonaws.com/nti-final-ecr"
+    tag: "latest"
+  replicas: 2
+  port: 5000
+
+frontend:
+  image:
+    repository: "463470958932.dkr.ecr.us-east-2.amazonaws.com/nti-final-ecr"
+    tag: "latest"
+  replicas: 2
+  port: 80
+
+dbSecretName: db-credentials
