@@ -12,7 +12,7 @@ DB_HOST = os.environ.get("DB_HOST", "db")
 DB_PORT = os.environ.get("DB_PORT", "3306")
 DB_NAME = os.environ.get("DB_NAME", "appdb")
 DB_USER = os.environ.get("DB_USER", "appuser")
-DB_PASSWORD = os.environ.get("DB_PASSWORD", "apppassword")
+DB_PASSWORD = os.environ.get("DB_PASSWORD")
 
 
 def get_connection():
