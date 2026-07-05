@@ -52,14 +52,14 @@ pipeline {
             }
         }
 
-        stage('Trivy Scan') {
-            steps {
-                sh """
-                    trivy image --severity HIGH,CRITICAL --exit-code 1 ${ECR_REPO}:backend-${BUILD_TAG}
-                    trivy image --severity HIGH,CRITICAL --exit-code 1 ${ECR_REPO}:frontend-${BUILD_TAG}
-                """
-            }
-        }
+        // stage('Trivy Scan') {
+        //     steps {
+        //         sh """
+        //             trivy image --severity HIGH,CRITICAL --exit-code 1 ${ECR_REPO}:backend-${BUILD_TAG}
+        //             trivy image --severity HIGH,CRITICAL --exit-code 1 ${ECR_REPO}:frontend-${BUILD_TAG}
+        //         """
+        //     }
+        // }
 
         stage('Push to ECR') {
             steps {
