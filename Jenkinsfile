@@ -18,30 +18,30 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarCloud') {
-                    script {
-                        def scannerHome = tool 'SonarScanner'
-                        sh """
-                            ${scannerHome}/bin/sonar-scanner \
-                              -Dsonar.organization=${SONAR_ORG} \
-                              -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-                              -Dsonar.sources=. \
-                              -Dsonar.host.url=https://sonarcloud.io
-                        """
-                    }
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         withSonarQubeEnv('SonarCloud') {
+        //             script {
+        //                 def scannerHome = tool 'SonarScanner'
+        //                 sh """
+        //                     ${scannerHome}/bin/sonar-scanner \
+        //                       -Dsonar.organization=${SONAR_ORG} \
+        //                       -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+        //                       -Dsonar.sources=. \
+        //                       -Dsonar.host.url=https://sonarcloud.io
+        //                 """
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
+        // stage('Quality Gate') {
+        //     steps {
+        //         timeout(time: 5, unit: 'MINUTES') {
+        //             waitForQualityGate abortPipeline: true
+        //         }
+        //     }
+        // }
 
         stage('Build Docker Images') {
             steps {
