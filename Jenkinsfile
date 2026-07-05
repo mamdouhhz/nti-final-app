@@ -71,6 +71,44 @@ pipeline {
             }
         }
 
+        stage('Debug EKS') {
+            steps {
+                sh '''
+                    whoami
+                    pwd
+                    aws sts get-caller-identity
+
+                    which kubectl || true
+                    kubectl version --client || true
+
+                    echo "=== kubeconfig ==="
+                    cat ~/.kube/config
+
+                    echo "=== endpoint ==="
+                    aws eks describe-cluster \
+                    --name nti-final-eks \
+                    --region us-east-2 \
+                    --query cluster.endpoint \
+                    --output text
+
+                    echo "=== nslookup ==="
+                    nslookup $(aws eks describe-cluster \
+                    --name nti-final-eks \
+                    --region us-east-2 \
+                    --query cluster.endpoint \
+                    --output text | sed 's|https://||') || true
+
+                    echo "=== curl ==="
+                    curl -vk --connect-timeout 5 \
+                    $(aws eks describe-cluster \
+                    --name nti-final-eks \
+                    --region us-east-2 \
+                    --query cluster.endpoint \
+                    --output text)/version || true
+                '''
+            }
+        }
+
         stage('Deploy to EKS') {
             when {
                 branch 'prod'
