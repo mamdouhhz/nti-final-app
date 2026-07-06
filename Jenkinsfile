@@ -112,7 +112,7 @@ pipeline {
 
         stage('Deploy to EKS') {
             when {
-                branch 'prod'
+                branch 'main'
             }
             steps {
                 sh """
